@@ -26,7 +26,7 @@ Ike do(
   // api
   task := method(name,
     if(currentNamespace) then(name = "#{currentNamespace}:#{name}" interpolate)
-    tasks << Ike Task new(name, call message argAt(1), nextDesc)
+    tasks << Ike Task new(name, call message arguments last, nextDesc)
     nextDesc = nil
   )
 
@@ -43,8 +43,8 @@ Ike do(
   invoke := method(target,
     log("Invoking `#{target}`")
     task := tasks detect(name == target) 
-    if(target == "default" and task isNil) then(return Ike noDefault)
-    if(task, task invoke, invoke("default"))
+    if(target == "default" and task isNil) then(return noDefault)
+    task ?invoke or invoke("default")
   )
 
   ////
@@ -71,6 +71,10 @@ Ike do(
   noDefault := method(
     "Please define a default task, like this: task(\"default\", stuff)" println
   )
+
+  help := method("Help en route." println)
+
+  version := method("version -50" println)
 )
 
 ////
@@ -86,6 +90,10 @@ list("task", "desc", "namespace") foreach(slot,
 ////
 // built-in tasks
 task("-T", Ike showTasks)
+task("-h", Ike help)
+task("--help", Ike help)
+task("-v", Ike version)
+task("--version", Ike version)
 
 ////
 // load the ikefile

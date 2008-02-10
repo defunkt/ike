@@ -13,9 +13,9 @@ task("predeploy",
   "predeploy tasks" println
 )
 
-desc("Deploy a bitch")
-task("deploy", "predeploy"
-  "chain" println
+desc("Deploy a ya shniz")
+task("deploy", "predeploy",
+  "deploy'd" println
 )
 
 namespace("mongrel",
