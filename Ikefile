@@ -1,0 +1,26 @@
+task("test", 
+  "noop" println
+)
+
+task("hello", "hello!" println)
+
+desc("Set a production environment.")
+task("production",
+  "now you can " print
+)
+
+task("predeploy",
+  "predeploy tasks" println
+)
+
+desc("Deploy a bitch")
+task("deploy", "predeploy"
+  "chain" println
+)
+
+namespace("mongrel",
+  desc("Restart mongrels")
+  task("restart",
+    "nicely done" println
+  )
+)
