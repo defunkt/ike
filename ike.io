@@ -11,12 +11,11 @@ Ike do(
   ////
   // Task object
   Task := Object clone do(
-    new := method(name, body, desc,
-      child := self clone
-      child setSlot("name", name) 
-      child setSlot("body", body) 
-      child setSlot("desc", desc)
-      child
+    with := method(name, body, desc,
+      self setSlot("name", name) 
+      self setSlot("body", body) 
+      self setSlot("desc", desc)
+      self
     )
 
     invoke := method(doMessage(body))
@@ -26,7 +25,7 @@ Ike do(
   // api
   task := method(name,
     if(currentNamespace) then(name = "#{currentNamespace}:#{name}" interpolate)
-    tasks << Ike Task new(name, call message arguments last, nextDesc)
+    tasks << Ike Task clone with(name, call message arguments last, nextDesc)
     nextDesc = nil
   )
 
@@ -79,12 +78,14 @@ Ike do(
 
 ////
 // ext
-List setSlot("<<", method(other, append(other)))
+List << := method(other, append(other))
+Object new := method(clone with(call message arguments))
 
 ////
 // setup our dsl
 list("task", "desc", "namespace") foreach(slot,
-  setSlot(slot, method(call delegateTo(Ike)))
+    setSlot(slot, method(call delegateTo(Ike))
+  )
 )
 
 ////
