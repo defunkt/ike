@@ -79,7 +79,6 @@ Ike do(
 ////
 // ext
 List << := method(other, append(other))
-Object new := method(clone with(call message arguments))
 
 ////
 // setup our dsl
