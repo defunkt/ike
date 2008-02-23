@@ -16,7 +16,7 @@ task("predeploy",
 desc("Deploy a ya shniz")
 task("deploy", 
   "deploy'd" println
-) after("predeploy")
+) 
 
 namespace("mongrel",
   desc("Restart mongrels")

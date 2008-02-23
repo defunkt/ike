@@ -15,10 +15,15 @@ Ike do(
       self setSlot("name", name) 
       self setSlot("body", body) 
       self setSlot("desc", desc)
+      self setSlot("dependency")
       self
     )
 
     invoke := method(doMessage(body))
+
+    after := method(dependency, 
+      self dependency = dependency 
+    )
   )
 
   ////
